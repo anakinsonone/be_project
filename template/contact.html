@@ -1,0 +1,166 @@
+
+{% extends "layout.html" %}
+  {% block body %}
+
+    
+
+    <!-- ##### Contact Area Info Start ##### -->
+    <div class="contact-area-info section-padding-0-100">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <!-- Contact Thumbnail -->
+                <div class="col-12 col-md-6">
+                    <div class="contact--thumbnail">
+                        <img src="{{url_for('static', filename='img/bg-img/25.jpg')}}" alt="">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-5">
+                    <!-- Section Heading -->
+                    <div class="section-heading">
+                        <h2>CONTACT US</h2>
+                        <p>We are improving our services to serve you better.</p>
+                    </div>
+                    <!-- Contact Information -->
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Contact Area Info End ##### -->
+
+    <!-- ##### Contact Area Start ##### -->
+    <section class="contact-area">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12 col-lg-5">
+                    <!-- Section Heading -->
+                     {% if sendmessage != "": %}
+                            <div id="sendmessage" class="text-danger">{{sendmessage}}</div>
+                        {% endif %}
+                        {% if errormessage != "": %}
+                            <div id="errormessage" class="text-danger">{{errormessage}}</div>
+                        {% endif %}
+                    <div class="section-heading">
+                        <h2>GET IN TOUCH</h2>
+                        <p>Send us a message, we will call back later</p>
+                    </div>
+                    <!-- Contact Form Area -->
+                    <div class="contact-form-area mb-100">
+                        <form action="/contact" method="post" onsubmit="return validation()"class="bg-light">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="name" placeholder="Enter Your Name" name="name" autocomplete="off" required="">
+                                    </div>
+                                </div>
+                                <span id="username" class="text-danger font-weight-bold"> </span>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" id="email" placeholder="Enter Your Email" name="email" autocomplete="off" required="">
+                                    </div>
+                                </div>
+                                <span id="emailids" class="text-danger font-weight-bold"> </span>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                         <input type="text" class="form-control" name="contact" placeholder="Enter your contact" id="MobileNumber" autocomplete="off" required=""pattern="[7-9]{1}[0-9]{9}" 
+       title="Phone number with 7-9 and remaing 9 digit with 0-9">
+                                    </div>
+                                </div>
+                                <span id="mobileno" class="text-danger font-weight-bold"> </span>
+                                <div class="col-12">
+                                    <textarea name="message" cols="30" rows="7" class="form-control" placeholder="Enter your Message" id="message" autocomplete="off" required=""></textarea>
+                                </div>
+                                <span id="message" class="text-danger font-weight-bold"> </span>
+                                <div class="col-12">
+                                    <input type="submit" class="btn alazea-btn mt-15" value="Send Message"></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6">
+                    <!-- Google Maps -->
+                    <div class="map-area mb-100">
+                       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30243.55626407104!2d73.76274738788344!3d18.644037689568943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b9c02954e8cb%3A0x525d708de1d526f2!2sAkurdi%2C%20Pimpri-Chinchwad%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1610623157713!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+    
+
+    function validation(){
+
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var contact = document.getElementById('contact').value;
+      var message = document.getElementById('message').value;
+
+
+
+      if(name == ""){
+        document.getElementById('username').innerHTML =" ** Please fill the username field";
+        return false;
+      }
+      if((name.length <= 2) || (user.length > 20)) {
+        document.getElementById('username').innerHTML =" ** Username lenght must be between 2 and 20";
+        return false; 
+      }
+      if(!isNaN(name)){
+        document.getElementById('username').innerHTML =" ** only characters are allowed";
+        return false;
+      }
+
+
+      if(email == ""){
+        document.getElementById('emailids').innerHTML =" ** Please fill the email idx` field";
+        return false;
+      }
+      if(emails.indexOf('@') <= 0 ){
+        document.getElementById('emailids').innerHTML =" ** @ Invalid Position";
+        return false;
+      }
+
+      if((emails.charAt(emails.length-4)!='.') && (emails.charAt(emails.length-3)!='.')){
+        document.getElementById('emailids').innerHTML =" ** . Invalid Position";
+        return false;
+      }
+
+
+      if(contact == ""){
+        document.getElementById('mobileno').innerHTML =" ** Please fill the mobile NUmber field";
+        return false;
+      }
+      if(isNaN(contact)){
+        document.getElementById('mobileno').innerHTML =" ** user must write digits only not characters";
+        return false;
+      }
+      if(contact.length!=10){
+        document.getElementById('mobileno').innerHTML =" ** Mobile Number must be 10 digits only";
+        return false;
+      }
+
+      if(message == ""){
+        document.getElementById('message').innerHTML =" ** Please fill the message field";
+        return false;
+      }
+      if((message.length <= 2) || (message.length > 20)) {
+        document.getElementById('message').innerHTML =" ** Message lenght must be between 2 and 20";
+        return false; 
+      }
+      if(!isNaN(message)){
+        document.getElementById('message').innerHTML =" ** only characters are allowed";
+        return false;
+      }
+
+
+    }
+
+  </script>
+    <!-- ##### Contact Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+     {% endblock %}

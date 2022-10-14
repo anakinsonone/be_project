@@ -1,0 +1,16 @@
+{
+	"params":
+	{
+		"local_server":"True",
+		"local_uri":"mysql://root:@localhost/farm",
+		"prod_uri":"mysql://root:@localhost/farm",
+		"fb_url":"https://facebook.com/plant",
+		"tw_url":"https://twitter.com/plant",
+		"git_url":"https://github.com/plant",
+		"blog_name":"Plant",
+		"login_image":"login.jpeg",
+		"gmail_user":"demoproject58@gmail.com",
+		"gmail_password":"project@123"
+
+	}
+} 

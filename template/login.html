@@ -1,0 +1,372 @@
+{% extends "layout.html" %}
+  {% block body %}
+ <!--  <style type="text/css">
+  	.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+  </style> -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<!-- {% with messages = get_flashed_messages() %}
+        {% if messages %}
+             {% for message in messages %}
+             <div class="alert alert-danger" role="alert">
+                 <center>{{ message }}</center> 
+              </div>
+              {% endfor %}
+        {% endif %}
+    {% endwith %} -->
+<div class="container" >
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+  
+        <div class="bg-img">
+         <div class="content" >
+           <main>
+                {% with messages=get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category,message in messages %}
+                        {% if category== 'success' %}
+                          <div class="alert alert-success mb-3" role="alert" color="green">{{message}}</div>
+                        {% endif %}
+                        {% if category== 'error' %}
+                           <div class="alert alert-danger mb-3" role="alert" color="red">{{message}}</div>
+                        {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+               </main>
+            <header>Login Form</header>
+            <form action="/login" method="post">
+               <div class="field">
+                  <span class="fa fa-user"></span>
+                  <input type="text" required placeholder="Email or Phone" name="email">
+               </div>
+               <div class="field space">
+                  <span class="fa fa-lock"></span>
+                  <input type="password" class="pass-key" required placeholder="Password" name="password">
+                  <span class="show">SHOW</span>
+               </div><br>
+              <!--  <div class="pass">
+                  <a href="/view">Forgot Password?</a>
+               </div> -->
+               <div class="field">
+                  <input type="submit" value="LOGIN">
+               </div>
+            </form>
+           <!--  <div class="login">
+               Or login with
+            </div>
+            <div class="links">
+               <div class="facebook">
+                  <i class="fab fa-facebook-f"><span>Facebook</span></i>
+               </div>
+               <div class="instagram">
+                  <i class="fab fa-instagram"><span>Instagram</span></i>
+               </div>
+            </div> -->
+            <div class="signup">
+               Don't have account?
+               <a href="/register">Signup Now</a>
+            </div>
+         </div>
+      </div>
+      <style type="text/css">
+         @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Poppins:400,500&display=swap');
+/**{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}*/
+.bg-img{
+  background: url('{{url_for('static',filename='img/bg-img/16.jpg')}}');
+  height: 60vh;
+  background-size: cover;
+  background-position: center;
+}
+.bg-img:after{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+}
+.content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+  text-align: center;
+  padding: 60px 32px;
+  width: 600px;
+  transform: translate(-50%,-50%);
+  background: rgba(255,255,255,0.04);
+  box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+
+}
+.content header{
+  color: white;
+  font-size: 33px;
+  font-weight: 600;
+  margin: 0 0 35px 0;
+
+  font-family: 'Montserrat',sans-serif;
+}
+.field{
+  position: relative;
+  height: 45px;
+  width: 100%;
+  display: flex;
+  background: rgba(255,255,255,0.94);
+}
+.field span{
+  color: #222;
+  width: 40px;
+  line-height: 45px;
+}
+.field input{
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #222;
+  font-size: 16px;
+  font-family: 'Poppins',sans-serif;
+}
+.space{
+  margin-top: 16px;
+}
+.show{
+  position: absolute;
+  right: 13px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #222;
+  display: none;
+  cursor: pointer;
+  font-family: 'Montserrat',sans-serif;
+}
+.pass-key:valid ~ .show{
+  display: block;
+}
+/*.container{ background: url('{{url_for('static',filename='img/bg-img/17.jpg')}}') no-repeat}*/
+.pass{
+  text-align: left;
+  margin: 10px 0;
+}
+.pass a{
+  color: white;
+  text-decoration: none;
+  font-family: 'Poppins',sans-serif;
+}
+.pass:hover a{
+  text-decoration: underline;
+}
+.field input[type="submit"]{
+  background: #3498db;
+  border: 1px solid #2691d9;
+  color: white;
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Montserrat',sans-serif;
+}
+.field input[type="submit"]:hover{
+  background: #2691d9;
+}
+.login{
+  color: white;
+  margin: 20px 0;
+  font-family: 'Poppins',sans-serif;
+}
+.links{
+  display: flex;
+  cursor: pointer;
+  color: white;
+  margin: 0 0 20px 0;
+}
+.facebook,.instagram{
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  margin-left: 10px;
+}
+.facebook{
+  margin-left: 0;
+  background: #4267B2;
+  border: 1px solid #3e61a8;
+}
+.instagram{
+  background: #E1306C;
+  border: 1px solid #df2060;
+}
+.facebook:hover{
+  background: #3e61a8;
+}
+.instagram:hover{
+  background: #df2060;
+}
+.links i{
+  font-size: 17px;
+}
+i span{
+  margin-left: 8px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-family: 'Poppins',sans-serif;
+}
+.signup{
+  font-size: 15px;
+  color: white;
+  font-family: 'Poppins',sans-serif;
+}
+.signup a{
+  color: #3498db;
+  text-decoration: none;
+}
+.signup a:hover{
+  text-decoration: underline;
+}
+      </style>
+      <script>
+         const pass_field = document.querySelector('.pass-key');
+         const showBtn = document.querySelector('.show');
+         showBtn.addEventListener('click', function(){
+          if(pass_field.type === "password"){
+            pass_field.type = "text";
+            showBtn.textContent = "HIDE";
+            showBtn.style.color = "#3498db";
+          }else{
+            pass_field.type = "password";
+            showBtn.textContent = "SHOW";
+            showBtn.style.color = "#222";
+          }
+         });
+      </script>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    
+
+    function validation(){
+
+     
+      var emails = document.getElementById('emails').value;
+      var pass = document.getElementById('pass').value;
+
+
+
+
+      if(emails == ""){
+        document.getElementById('emailids').innerHTML =" ** Please fill the email idx` field";
+        return false;
+      }
+      if(emails.indexOf('@') <= 0 ){
+        document.getElementById('emailids').innerHTML =" ** @ Invalid Position";
+        return false;
+      }
+
+      if((emails.charAt(emails.length-4)!='.') && (emails.charAt(emails.length-3)!='.')){
+        document.getElementById('emailids').innerHTML =" ** . Invalid Position";
+        return false;
+      }
+
+
+
+
+      if(pass == ""){
+        document.getElementById('passwords').innerHTML =" ** Please fill the password field";
+        return false;
+      }
+      if((pass.length <= 4) || (pass.length > 20)) {
+        document.getElementById('passwords').innerHTML =" ** Passwords lenght must be between  4 and 20";
+        return false; 
+      }
+
+
+    
+    }
+
+  </script>
+    
+ {% endblock %}
